@@ -190,14 +190,7 @@ jobs:
             echo "No digests found in /tmp/${{ env.IMAGE_NAME }}-digests" >&2
             exit 1
           fi
-
-          if [[ "${VERSION}" == canary || "${VERSION}" == canary-* || "${VERSION}" == canary.* ]]; then
-            FLOATING_TAG="canary"
-          elif [[ "${VERSION}" =~ (alpha|beta|rc) ]]; then
-            FLOATING_TAG="beta"
-          else
-            FLOATING_TAG="latest"
-          fi
+          FLOATING_TAG="latest"
 
           docker buildx imagetools create \
             -t "${IMAGE}:${VERSION}" \
