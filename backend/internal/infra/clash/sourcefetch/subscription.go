@@ -99,7 +99,13 @@ func (f *Fetcher) FetchYAML(ctx context.Context, rawURL string) (*FetchResult, e
 		return nil, ErrFetchSubscription
 	}
 	req.Header.Set("Accept", "application/x-yaml,text/yaml,text/plain,*/*")
-	req.Header.Set("User-Agent", "Foam-Server")
+	// 尝试从环境变量读取 UA
+	customUA := os.Getenv("SUBSCRIBE_USER_AGENT")
+	if customUA == "" {
+    // 如果没设置，给一个默认保底的
+    	customUA = "mihomo/1.18.0"
+	}
+	req.Header.Set("User-Agent", customUA)
 
 	resp, err := f.client.Do(req)
 	if err != nil {
