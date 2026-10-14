@@ -1,6 +1,6 @@
 services:
   poolx:
-    image: "${FOAM_IMAGE:-ghcr.io/rain-kl/poolx:latest}"
+    image: "${FOAM_IMAGE:-ghcr.io/wpfpzw/poolx:latest}"
     ports:
       - "${FOAM_PORT:-18100}:8000"
     # Compose automatically loads host `.env` for ${VAR} substitution.
